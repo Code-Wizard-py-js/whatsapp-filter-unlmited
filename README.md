@@ -1,4 +1,4 @@
-# whatsapp-filter-unlmited
+# whatsapp-filter-unlimited
 This is a Node.js command line script that allows you to perform various operations using the WhatsApp Web API and generate a QR code. The script takes command line arguments and utilizes the following package dependencies: whatsapp-web.js, fs, qrcode, yargs, express, and child_process.
 
 Prerequisites
