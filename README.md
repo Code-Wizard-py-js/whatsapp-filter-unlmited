@@ -1,62 +1,62 @@
 # whatsapp-filter-unlimited
-This is a Node.js command line script that allows you to perform various operations using the WhatsApp Web API and generate a QR code. The script takes command line arguments and utilizes the following package dependencies: whatsapp-web.js, fs, qrcode, yargs, express, and child_process.
 
-Prerequisites
-Before running this script, make sure you have Node.js and npm (Node Package Manager) installed on your system. You can download and install them from the official Node.js website: https://nodejs.org
+# Node.js WhatsApp Server
 
-Installation
-To install the required packages, open your terminal or command prompt and navigate to the project directory. Run the following command:
+This Node.js server allows you to check the validity of phone numbers using the WhatsApp platform.
 
-Copy code
-npm install
-This will install all the necessary packages specified in the package.json file.
+## Prerequisites
 
-Usage
-To run the script, use the following command:
+Before running this server, ensure that you have the following packages installed:
 
-css
-Copy code
-node script.js -x 1010 -y 1 [profile name]
-Replace [profile name] with the desired name for your WhatsApp profile.
+- `whatsapp-web.js`
+- `fs`
+- `qrcode`
+- `yargs`
+- `express`
+- `child_process`
 
-The script utilizes the following command line arguments:
+You can install these packages by running the following command:
+npm install whatsapp-web.js fs qrcode yargs express child_process
 
--x: Specify the value for parameter x (example: 1010).
--y: Specify the value for parameter y (example: 1).
-[profile name]: Specify the name for your WhatsApp profile.
-Example
-yaml
-Copy code
-node script.js -x 1010 -y 1 John
-This will execute the script with the parameters -x 1010 -y 1 and set the profile name as "John".
+Additionally, you need to download Chromium and set its path to `./chrome-win/chrome.exe` in order to generate QR codes.
 
-Packages Used
-whatsapp-web.js: Provides an API for interacting with WhatsApp Web using Node.js. You can find more information about this package here: https://www.npmjs.com/package/whatsapp-web.js
+1. Download Chromium from the official website: [https://www.chromium.org/getting-involved/download-chromium](https://www.chromium.org/getting-involved/download-chromium)
 
-fs: A built-in Node.js module for handling file system operations.
+2. Extract the downloaded archive.
 
-qrcode: A library for generating QR codes. More details can be found here: https://www.npmjs.com/package/qrcode
+3. Copy the `chrome.exe` file from the extracted folder.
 
-yargs: A command line argument parser for Node.js. Visit the following link for more information: https://www.npmjs.com/package/yargs
+4. Paste the `chrome.exe` file into the `./chrome-win/` directory in your project.
 
-express: A fast and minimalist web framework for Node.js. You can learn more about Express here: https://www.npmjs.com/package/express
+Create a folder named `qrcode` in the root directory of your project. This folder will store the QR codes that you need to scan using your phone to start the server.
 
-child_process: A built-in Node.js module for executing shell commands.
 
-Please note that it's important to have the required packages installed before running the script.
+## Usage
 
-License
-This project is licensed under the MIT License. Feel free to modify and use it according to your needs.
+To start the server, execute the following command:
 
-Acknowledgements
-The whatsapp-web.js package, developed by pedroslopez, enables seamless interaction with the WhatsApp Web API.
+node whatsapp-server.js -x 1010 -y "Your Profile Name"
 
-The qrcode package, created by davidshimjs, provides QR code generation functionality.
+Make sure to replace the values `-x 1010` and `-y "Your Profile Name"` with your desired port number and profile name, respectively.
 
-The yargs package, maintained by bcoe, simplifies the handling of command line arguments.
+Once the server is running, you can check the validity of a phone number by sending an HTTP GET request to the following URL:
 
-The express package, developed by the Express.js team, offers a powerful web framework for building Node.js applications.
+http://localhost:100/profile/phone-number
 
-The child_process module, provided by the Node.js core, facilitates the execution of shell commands from within a Node.js script.
+Replace `1010` with the port number you specified when starting the server, `profile` with your chosen profile name, and `phone-number` with the number you want to check.
 
-Feel free to explore and customize this script to meet your specific requirements
+The server will respond with a JSON object indicating the status of the phone number:
+
+- If the number is valid, the response will be:
+
+```json
+{
+  "status": "VALID",
+  "number": "phone-number"
+}
+If the number is invalid, the response will be:
+{
+  "status": "INVALID",
+  "number": "phone-number"
+}
+
