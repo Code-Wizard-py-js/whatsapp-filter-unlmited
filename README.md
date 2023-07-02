@@ -47,9 +47,10 @@ Replace `1010` with the port number you specified when starting the server, `pro
 
 The server will respond with a JSON object indicating the status of the phone number:
 
-- If the number is valid, the response will be:
+
 
 ```json
+If the number is valid, the response will be:
 {
   "status": "VALID",
   "number": "phone-number"
